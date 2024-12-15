@@ -105,3 +105,19 @@ services:
     volumes:
       - /mnt/rapid/data/arr/bazarr:/config
       - /mnt/main/nas/content/media:/data
+  lazylibrarian:
+    container_name: lazylibrarian
+    image: lscr.io/linuxserver/lazylibrarian:latest
+    environment:
+      - PUID=4000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+      - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/rapid/data/arr/lazylibrarian:/config
+      - /mnt/main/nas/content/torrents/complete/books:/downloads
+      - /mnt/main/nas/content/books:/books
+    ports:
+      - 5299:5299
+    restart: unless-stopped
