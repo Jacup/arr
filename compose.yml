@@ -47,20 +47,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /mnt/rapid/data/arr/qbittorrent:/config
       - /mnt/main/nas/content/torrents:/data/torrents
-  readarr:
-    container_name: readarr
-    image: ghcr.io/hotio/readarr:latest
-    ports:
-      - "8787:8787"
-    environment:
-      - PUID=4000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Europe/Warsaw
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /mnt/rapid/data/arr/readarr:/config
-      - /mnt/main/nas/content:/data
   radarr:
     container_name: radarr
     image: ghcr.io/hotio/radarr:latest
@@ -105,19 +91,3 @@ services:
     volumes:
       - /mnt/rapid/data/arr/bazarr:/config
       - /mnt/main/nas/content/media:/data
-  lazylibrarian:
-    container_name: lazylibrarian
-    image: lscr.io/linuxserver/lazylibrarian:latest
-    environment:
-      - PUID=4000
-      - PGID=1000
-      - TZ=Europe/Warsaw
-      - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /mnt/rapid/data/arr/lazylibrarian:/config
-      - /mnt/main/nas/content/torrents/complete/books:/downloads
-      - /mnt/main/nas/content/books:/books
-    ports:
-      - 5299:5299
-    restart: unless-stopped
