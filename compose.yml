@@ -47,14 +47,28 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /mnt/rapid/data/arr/qbittorrent:/config
       - /mnt/main/nas/content/torrents:/data/torrents
-  radarr:
-    container_name: radarr
+  readarr:
+    container_name: readarr
+    image: ghcr.io/hotio/readarr
+    ports:
+      - "8787:8787"
     environment:
       - PUID=4000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Warsaw
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/rapid/data/arr/readarr:/config
+      - /mnt/main/nas/content:/data
+  radarr:
+    container_name: radarr
     image: ghcr.io/hotio/radarr:latest
+    environment:
+      - PUID=4000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Warsaw
     ports:
       - "7878:7878"
     restart: unless-stopped
