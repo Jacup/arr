@@ -67,11 +67,13 @@ services:
     environment:
       - PUID=4000
       - PGID=1000
-      - TZ=Europe/Oslo
+      - UMASK=002
+      - TZ=Europe/Warsaw
     image: ghcr.io/hotio/sonarr:latest
     ports:
       - "8989:8989"
     restart: unless-stopped
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /mnt/rapid/data/arr/sonarr:/config
       - /mnt/main/nas/content:/data
