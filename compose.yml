@@ -49,7 +49,7 @@ services:
       - /mnt/main/nas/content/torrents:/data/torrents
   readarr:
     container_name: readarr
-    image: ghcr.io/hotio/readarr
+    image: ghcr.io/hotio/readarr:latest
     ports:
       - "8787:8787"
     environment:
